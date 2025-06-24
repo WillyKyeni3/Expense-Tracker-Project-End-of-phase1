@@ -35,3 +35,19 @@ body {
 .app-header h1 {
   margin: 0;
 }
+
+/* moon icon */
+#dark-mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.bx {
+    font-size: 1.5rem;
+    color: rgb(241, 241, 241);
+}
+.bx:hover {
+    color: #a8a8a8;
+}
