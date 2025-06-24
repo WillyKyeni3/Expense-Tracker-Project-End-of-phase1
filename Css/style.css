@@ -14,3 +14,24 @@ body.dark-mode {
   --card-bg: #2a2a2a;
 }
 
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--accent-color);
+  color: white;
+}
+
+.app-header h1 {
+  margin: 0;
+}
