@@ -51,3 +51,58 @@ body {
 .bx:hover {
     color: #a8a8a8;
 }
+
+/* Main Layout */
+.app-main {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-column,
+.right-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Form & Filters */
+form,
+.filters {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+form label,
+.filters label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+form input,
+form select,
+form textarea,
+.filters input,
+.filters select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+form button,
+.filters button,
+#reset-filters {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
