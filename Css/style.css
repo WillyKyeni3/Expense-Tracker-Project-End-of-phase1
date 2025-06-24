@@ -142,3 +142,17 @@ form button,
   font-size: 0.8rem;
   text-transform: uppercase;
 }
+
+/* Chart */
+#chart-container {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
