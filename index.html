@@ -29,6 +29,7 @@
           Amount:
           <input type="number" id="amount" placeholder="e.g., 50.00" required />
         </label>
+        <!-- category dropdown -->
         <label>
           Category:
           <select id="category" required>
@@ -44,6 +45,7 @@
           Description:
           <input type="text" id="description" placeholder="e.g., Groceries" required />
         </label>
+        <!-- Date -->
         <label>
           Date:
           <input type="date" id="date" required />
@@ -51,6 +53,15 @@
         <button type="submit">Add Expense</button>
       </form>
     </section>
+
+    <!-- RIGHT COLUMN: Expense List & Chart -->
+    <section class="right-column">
+      <!-- EXPENSE LIST -->
+      <div id="expense-list">
+        <h2>Expense List</h2>
+        <ul id="expenses"></ul>
+      </div>
+      
   </main>
 
 </body>
