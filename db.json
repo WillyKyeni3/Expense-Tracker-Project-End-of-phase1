@@ -2,7 +2,7 @@
   "expenses": [
     {
       "id": 1,
-      "amount": 25.50,
+      "amount": 25.5,
       "category": "Food",
       "description": "Groceries",
       "date": "2025-10-01"
@@ -30,10 +30,17 @@
     },
     {
       "id": 5,
-      "amount": 80.00,
+      "amount": 80,
       "category": "Utilities",
       "description": "Electricity Bill",
       "date": "2025-10-04"
+    },
+    {
+      "id": "d524",
+      "amount": 300,
+      "category": "Food",
+      "description": "Chicken",
+      "date": "2025-06-25"
     }
   ]
 }
