@@ -14,7 +14,7 @@ let allExpenses = [];
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
   loadExpenses();
-//   setupEventListeners();
+  setupEventListeners();
 });
 
 // fetch expenses from localStorage
@@ -159,4 +159,21 @@ function setupDarkMode() {
       ? '☀️ Light Mode' 
       : '🌙 Dark Mode';
   });
+}
+
+// setup event listeners
+function setupEventListeners() {
+    // Handle form submission
+    expenseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+      const newExpense = {
+      amount: parseFloat(document.getElementById('amount').value),
+      category: document.getElementById('category').value,
+      description: document.getElementById('description').value,
+      date: document.getElementById('date').value
+    };
+    
+    addExpense(newExpense);
+    })
 }
