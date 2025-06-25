@@ -32,3 +32,34 @@ function loadExpenses() {
     });
 }
 
+// render expenses in the list
+function renderExpenses(expenses) {
+    expenseList.innerHTML = '';
+    if (expenses.length === 0) {
+        expenseList.innerHTML = '<p>No expenses found.</p>';
+        return;
+    }
+    expenses.forEach(expense => {
+        const li = document.createElement('li');
+        li.className = 'expense-item';
+
+        //Color code categories
+        const categoryColors = {
+            Food: '#e0f7fa',
+            Housing: '#fff8e1',
+            Entertainment: '#fce4ec',
+            Transportation: '#efefer',
+            Utilities: '#e8f5e9'
+        };
+
+        li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
+
+        li.innerHTML = `
+            <div class="amount">-$${expense.amount.toFixed(2)}</div>
+            <div class="category-tag">${expense.category}</div>
+            <div class="description">${expense.description}</div>
+            <div class="date">${new Date(expense.date).toLocaleDateString()}</div>
+    `;
+        expenseList.appendChild(li);
+    });
+}
