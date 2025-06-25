@@ -52,6 +52,24 @@ body {
     color: #a8a8a8;
 }
 
+/* Add sun/moon icons */
+.bx-sun,
+.bx-moon {
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+/* Change icon color in dark mode */
+body.dark-mode .bx-sun,
+body.dark-mode .bx-moon {
+  color: #f1f1f1;
+}
+
+/* Hover effect */
+.bx:hover {
+  color: #a8a8a8;
+}
+
 /* Main Layout */
 .app-main {
   display: flex;
@@ -68,6 +86,37 @@ body {
 }
 
 /* Form & Filters */
+.filters {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.filters label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.filters select,
+.filters input[type="date"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+#reset-filters {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
 form,
 .filters {
   background: var(--card-bg);
@@ -156,3 +205,5 @@ canvas {
   max-width: 100%;
   height: auto;
 }
+
+/*responsive*/
