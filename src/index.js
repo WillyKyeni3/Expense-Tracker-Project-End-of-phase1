@@ -150,3 +150,13 @@ function renderChart(expenses) {
     }
   });
 }
+
+// Dark mode toggle
+function setupDarkMode() {
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') 
+      ? '☀️ Light Mode' 
+      : '🌙 Dark Mode';
+  });
+}
