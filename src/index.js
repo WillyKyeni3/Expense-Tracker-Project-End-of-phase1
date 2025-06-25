@@ -107,3 +107,12 @@ function filterExpenses() {
   renderExpenses(filtered);
   renderChart(filtered);
 }
+
+// Reset filters
+function resetFilters() {
+  categoryFilter.value = 'all';
+  startDateFilter.value = '';
+  endDateFilter.value = '';
+  renderExpenses(allExpenses);
+  renderChart(allExpenses);
+}
