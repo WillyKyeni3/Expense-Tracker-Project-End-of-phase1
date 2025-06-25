@@ -24,7 +24,7 @@ function loadExpenses() {
     .then(expenses => {
         allExpenses = expenses;
         renderExpenses(allExpenses);
-        // renderChart(allExpenses);
+        renderChart(allExpenses);
     })
     .catch(error => {
         console.error('Error loading expenses:', error);
@@ -75,7 +75,7 @@ function addExpense(expense) {
     .then(createdExpense => {
         allExpenses.unshift(createdExpense);
         renderExpenses(allExpenses);
-        // renderChart(allExpenses); uncomment when chart is implemented
+        renderChart(allExpenses); 
         expenseForm.reset();
     })
     .catch(error => {
@@ -115,4 +115,38 @@ function resetFilters() {
   endDateFilter.value = '';
   renderExpenses(allExpenses);
   renderChart(allExpenses);
+}
+
+// Chart.js integration
+function renderChart(expenses) {
+    // Aggregate expenses by category
+    const categoryTotals = expenses.reduce((acc, expense) => {
+        acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
+        return acc;
+    }, {});
+
+    // Destroy existing chart if it exists
+    if (window.expenseChart) {
+        window.expenseChart.destroy();
+    }
+
+    // Create new chart
+    const ctx = expenseChartCanvas.getContext('2d');
+  window.expenseChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: Object.keys(categoryTotals),
+      datasets: [{
+        data: Object.values(categoryTotals),
+        backgroundColor: ['#4caf50', '#2196f3', '#ffeb3b', '#f44336', '#9c27b0']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'right' },
+        title: { display: true, text: 'Spending Breakdown' }
+      }
+    }
+  });
 }
