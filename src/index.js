@@ -83,3 +83,27 @@ function addExpense(expense) {
         // alert('Failed to add expense. Please try again.');
     });
 }
+
+// Filter expenses
+function filterExpenses() {
+  const category = categoryFilter.value;
+  const startDate = startDateFilter.value;
+  const endDate = endDateFilter.value;
+
+  let filtered = [...allExpenses];
+
+  if (category !== 'all') {
+    filtered = filtered.filter(e => e.category === category);
+  }
+
+  if (startDate) {
+    filtered = filtered.filter(e => e.date >= startDate);
+  }
+
+  if (endDate) {
+    filtered = filtered.filter(e => e.date <= endDate);
+  }
+
+  renderExpenses(filtered);
+  renderChart(filtered);
+}
