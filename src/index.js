@@ -176,4 +176,15 @@ function setupEventListeners() {
     
     addExpense(newExpense);
     })
+
+    // Handle category filter change
+  categoryFilter.addEventListener('change', filterExpenses);
+  startDateFilter.addEventListener('change', filterExpenses);
+  endDateFilter.addEventListener('change', filterExpenses);
+
+    // Handle reset filters button
+    resetFiltersBtn.addEventListener('click', resetFilters);
+
+    // Setup dark mode toggle
+    setupDarkMode();
 }
