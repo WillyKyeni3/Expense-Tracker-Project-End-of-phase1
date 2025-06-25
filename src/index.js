@@ -14,7 +14,7 @@ let allExpenses = [];
 // Initialize App
 document.addEventListener('DOMContentLoaded', () => {
   loadExpenses();
-  setupEventListeners();
+//   setupEventListeners();
 });
 
 // fetch expenses from localStorage
@@ -24,7 +24,7 @@ function loadExpenses() {
     .then(expenses => {
         allExpenses = expenses;
         renderExpenses(allExpenses);
-        renderChart(allExpenses);
+        // renderChart(allExpenses);
     })
     .catch(error => {
         console.error('Error loading expenses:', error);
