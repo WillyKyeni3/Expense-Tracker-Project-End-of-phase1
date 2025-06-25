@@ -55,11 +55,31 @@ function renderExpenses(expenses) {
         li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
 
         li.innerHTML = `
-            <div class="amount">-$${expense.amount.toFixed(2)}</div>
+            <div class="amount">KE ${expense.amount.toFixed(2)}</div>
             <div class="category-tag">${expense.category}</div>
             <div class="description">${expense.description}</div>
             <div class="date">${new Date(expense.date).toLocaleDateString()}</div>
     `;
         expenseList.appendChild(li);
+    });
+}
+
+// Add new expense POST request
+function addExpense(expense) {
+    fetch('http://localhost:3000/expenses', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(expense)
+    })
+    .then(response => response.json())
+    .then(createdExpense => {
+        allExpenses.unshift(createdExpense);
+        renderExpenses(allExpenses);
+        // renderChart(allExpenses); uncomment when chart is implemented
+        expenseForm.reset();
+    })
+    .catch(error => {
+        console.error('Error adding expense:', error);
+        // alert('Failed to add expense. Please try again.');
     });
 }
