@@ -153,11 +153,19 @@ function renderChart(expenses) {
 
 // Dark mode toggle
 function setupDarkMode() {
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        darkModeToggle.textContent = document.body.classList.contains('dark-mode') 
-      ? '☀️ Light Mode' 
-      : '🌙 Dark Mode';
+  const icon = darkModeToggle.querySelector('i');
+  
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    
+    // Update icon or add visual feedback
+    if (document.body.classList.contains('dark-mode')) {
+      icon.classList.remove('bx-moon');
+      icon.classList.add('bx-sun');
+    } else {
+      icon.classList.remove('bx-sun');
+      icon.classList.add('bx-moon');
+    }
   });
 }
 
@@ -177,7 +185,7 @@ function setupEventListeners() {
     addExpense(newExpense);
     })
 
-    // Handle category filter change
+    // Handle category filter change: To be uncommented after fix
   categoryFilter.addEventListener('change', filterExpenses);
   startDateFilter.addEventListener('change', filterExpenses);
   endDateFilter.addEventListener('change', filterExpenses);
