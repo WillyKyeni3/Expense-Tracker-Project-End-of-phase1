@@ -5,35 +5,35 @@
       "amount": 25.50,
       "category": "Food",
       "description": "Groceries",
-      "date": "2023-10-01"
+      "date": "2025-10-01"
     },
     {
       "id": 2,
       "amount": 150,
       "category": "Housing",
       "description": "Rent",
-      "date": "2023-10-01"
+      "date": "2025-10-01"
     },
     {
       "id": 3,
       "amount": 12.99,
       "category": "Entertainment",
       "description": "Movie Night",
-      "date": "2023-10-02"
+      "date": "2025-10-02"
     },
     {
       "id": 4,
       "amount": 45.75,
       "category": "Transportation",
       "description": "Gas",
-      "date": "2023-10-03"
+      "date": "2025-10-03"
     },
     {
       "id": 5,
       "amount": 80.00,
       "category": "Utilities",
       "description": "Electricity Bill",
-      "date": "2023-10-04"
+      "date": "2025-10-04"
     }
   ]
 }
