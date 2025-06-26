@@ -42,7 +42,7 @@ A simple web application to track your daily expenses, visualize spending by cat
     ```
 
 5. **Or **
-- Click the github link to view the live demo: [Live Demo](https://your-live-demo-link.com)
+- Click the github link to view the live demo: [Live Demo](https://willykyeni3.github.io/Expense-Tracker-Project-End-of-phase1/)
 
 ### Project Structure
 .
