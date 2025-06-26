@@ -61,7 +61,7 @@ function renderExpenses(expenses) {
       <div class="amount">KE ${expense.amount.toFixed(2)}</div>
       <div class="category-tag">${expense.category}</div>
       <div class="description">${expense.description}</div>
-      <div class="date">${new Date(expense.date).toLocaleDateString()}</div>
+      <div class="date">${expense.date ? new Date(expense.date).toLocaleDateString() : 'N/A'}</div>
       <div class="actions">
         <button class="edit-btn" title="Edit"><i class='bx bx-edit'></i></button>
         <button class="delete-btn" title="Delete"><i class='bx bx-trash'></i></button>
@@ -172,44 +172,16 @@ function saveExpense(expenseId, updatedData, expenseItem) {
       return response.json();
     })
     .then(updatedExpense => {
-      // Update local state
+      // Update local state by finding the item and replacing it
       const index = allExpenses.findIndex(e => e.id === expenseId);
-      allExpenses[index] = updatedExpense;
-      
-      // Create updated HTML
-      const updatedHTML = `
-        <div class="amount">KE ${updatedExpense.amount.toFixed(2)}</div>
-        <div class="category-tag">${updatedExpense.category}</div>
-        <div class="description">${updatedExpense.description}</div>
-        <div class="date">${new Date(updatedExpense.date).toLocaleDateString()}</div>
-        <div class="actions">
-          <button class="edit-btn" title="Edit"><i class='bx bx-edit'></i></button>
-          <button class="delete-btn" title="Delete"><i class='bx bx-trash'></i></button>
-        </div>
-      `;
-      
-      // Replace form with updated HTML
-      expenseItem.classList.remove('edit-mode');
-      expenseItem.innerHTML = updatedHTML;
-      expenseItem.dataset.id = updatedExpense.id;
-      
-      // Reattach event listeners
-      const editBtn = expenseItem.querySelector('.edit-btn');
-      const deleteBtn = expenseItem.querySelector('.delete-btn');
-      
-      if (editBtn) {
-        editBtn.addEventListener('click', () => makeEditable(expenseItem, expenseId));
+      if (index !== -1) {
+        allExpenses[index] = updatedExpense;
       }
       
-      if (deleteBtn) {
-        deleteBtn.addEventListener('click', () => {
-          if (confirm('Delete this expense?')) {
-            deleteExpense(expenseId, expenseItem);
-          }
-        });
-      }
-      
-      // Update chart
+      // Re-render the entire list and chart with the updated data
+      // This is much simpler and avoids bugs with manual DOM manipulation
+      // and event listener re-attachment.
+      renderExpenses(allExpenses);
       renderChart(allExpenses);
     })
     .catch(error => {
@@ -269,7 +241,7 @@ function makeEditable(expenseItem, expenseId) {
       <option value="Utilities" ${originalExpense.category === 'Utilities' ? 'selected' : ''}>Utilities</option>
     </select>
     <input type="text" value="${originalExpense.description}" required>
-    <input type="date" value="${originalExpense.date}">
+    <input type="date" value="${originalExpense.date}" required>
     
     <div class="edit-actions">
       <button type="submit" class="save-btn"><i class='bx bx-save'></i></button>
@@ -358,10 +330,11 @@ function setupEventListeners() {
 function setupDynamicEventListeners() {
   // Delegated event listener for edit/delete
   expenseList.addEventListener('click', (e) => {
+    // e.preventDefault();
     const expenseItem = e.target.closest('.expense-item');
     if (!expenseItem) return;
 
-    const expenseId = parseInt(expenseItem.dataset.id);
+    const expenseId = expenseItem.dataset.id; //parseIntparseInt
     
     // Handle Edit Button
     if (e.target.closest('.edit-btn')) {
