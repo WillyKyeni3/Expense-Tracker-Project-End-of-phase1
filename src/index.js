@@ -52,7 +52,7 @@ function renderExpenses(expenses) {
       Housing: '#5c6bc0',
       Entertainment: '#007acc',
       Transportation: '#007a33',
-      Utilities: '#e0f7f1'
+      Utilities: '#9c27b0',
     };
 
     li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
