@@ -48,11 +48,11 @@ function renderExpenses(expenses) {
     
     // Color code categories
     const categoryColors = {
-      Food: '#e0f7fa',
-      Housing: '#fff8e1',
-      Entertainment: '#fce4ec',
-      Transportation: '#efefer',
-      Utilities: '#e8f5e9'
+      Food: '#66b3a1',
+      Housing: '#f44336',
+      Entertainment: '#007acc',
+      Transportation: '#007a33',
+      Utilities: '#e0f7f1'
     };
 
     li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
@@ -145,14 +145,14 @@ function renderChart(expenses) {
       labels: Object.keys(categoryTotals),
       datasets: [{
         data: Object.values(categoryTotals),
-        backgroundColor: ['#4caf50', '#2196f3', '#ffeb3b', '#f44336', '#9c27b0']
+        backgroundColor: ['#007acc', '#007a33', '#66b3a1', '#f44336', '#9c27b0']
       }]
     },
     options: {
       responsive: true,
       plugins: {
         legend: { position: 'right' },
-        title: { display: true, text: 'Spending Breakdown' }
+        title: { display: true, text: '' }
       }
     }
   });
