@@ -206,4 +206,63 @@ canvas {
   height: auto;
 }
 
+/* Expense Actions */
+.expense-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.expense-actions button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.expense-actions button:hover {
+  color: #d32f2f;
+}
+
+/* Edit Mode Styles */
+.edit-mode {
+  position: relative;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+}
+
+.edit-mode .amount,
+.edit-mode .category-tag,
+.edit-mode .description,
+.edit-mode .date {
+  display: none;
+}
+
+.edit-mode .edit-form {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.edit-mode .edit-form input,
+.edit-mode .edit-form select {
+  padding: 0.25rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+}
+
+.edit-mode .edit-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.edit-mode .edit-actions button {
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
 /*responsive*/
