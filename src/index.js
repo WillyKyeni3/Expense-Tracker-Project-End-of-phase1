@@ -253,7 +253,34 @@ function makeEditable(expenseItem, expenseId) {
       <button type="button" class="cancel-btn"><i class='bx bx-x'></i></button>
     </div>
   `;
+
+  // Replace content with form
+  expenseItem.innerHTML = '';
+  expenseItem.dataset.id = expenseId; // Store ID
+  expenseItem.appendChild(form);
   
+  // Handle Save
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const updatedExpense = {
+      amount: parseFloat(form.querySelectorAll('input')[0].value),
+      category: form.querySelector('select').value,
+      description: form.querySelectorAll('input')[1].value,
+      date: form.querySelectorAll('input')[2].value
+    };
+    
+    saveExpense(expenseId, updatedExpense, expenseItem);
+  });
+  
+  // Handle Cancel
+  form.querySelector('.cancel-btn').addEventListener('click', () => {
+    renderExpenses(allExpenses); // Revert to original view
+  });
+}
+
+// Save edited expense
+
 
     // Setup dark mode toggle
     setupDarkMode();
