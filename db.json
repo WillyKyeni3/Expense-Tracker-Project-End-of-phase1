@@ -27,6 +27,35 @@
       "category": "Housing",
       "description": "Rent",
       "date": "2025-06-26"
+    },
+    {
+      "id": "5",
+      "amount": 500,
+      "category": "Utilities",
+      "description": "Electricity Bill",
+      "date": "2025-06-27"
+    },
+    {
+      "id": "6",
+      "amount": 300,
+      "category": "Food",
+      "description": "Groceries",
+      "date": "2025-06-28"
+    },
+    {
+      "id": "7",
+      "amount": 1500,
+      "category": "Entertainment",
+      "description": "Concert Tickets",
+      "date": "2025-06-29"
+    },
+    {
+      "id": "8",
+      "amount": 150,
+      "category": "Transportation",
+      "description": "Bus Pass",
+      "date": "2025-06-30"
     }
+
   ]
 }
