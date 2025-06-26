@@ -49,7 +49,7 @@ function renderExpenses(expenses) {
     // Color code categories
     const categoryColors = {
       Food: '#66b3a1',
-      Housing: '#f44336',
+      Housing: '#5c6bc0',
       Entertainment: '#007acc',
       Transportation: '#007a33',
       Utilities: '#e0f7f1'
@@ -145,7 +145,7 @@ function renderChart(expenses) {
       labels: Object.keys(categoryTotals),
       datasets: [{
         data: Object.values(categoryTotals),
-        backgroundColor: ['#007acc', '#007a33', '#66b3a1', '#f44336', '#9c27b0']
+        backgroundColor: ['#007acc', '#007a33', '#66b3a1', '#5c6bc0', '#9c27b0']
       }]
     },
     options: {
