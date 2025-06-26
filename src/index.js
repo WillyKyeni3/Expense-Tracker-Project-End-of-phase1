@@ -231,6 +231,28 @@ function makeEditable(expenseItem, expenseId) {
   
   // Add edit mode class
   expenseItem.classList.add('edit-mode');
+
+  // Create edit form
+  const form = document.createElement('form');
+  form.className = 'edit-form';
+  
+  form.innerHTML = `
+    <input type="number" value="${originalExpense.amount}" required>
+    <select>
+      <option value="Food" ${originalExpense.category === 'Food' ? 'selected' : ''}>Food</option>
+      <option value="Housing" ${originalExpense.category === 'Housing' ? 'selected' : ''}>Housing</option>
+      <option value="Entertainment" ${originalExpense.category === 'Entertainment' ? 'selected' : ''}>Entertainment</option>
+      <option value="Transportation" ${originalExpense.category === 'Transportation' ? 'selected' : ''}>Transportation</option>
+      <option value="Utilities" ${originalExpense.category === 'Utilities' ? 'selected' : ''}>Utilities</option>
+    </select>
+    <input type="text" value="${originalExpense.description}" required>
+    <input type="date" value="${originalExpense.date}">
+    
+    <div class="edit-actions">
+      <button type="submit" class="save-btn"><i class='bx bx-save'></i></button>
+      <button type="button" class="cancel-btn"><i class='bx bx-x'></i></button>
+    </div>
+  `;
   
 
     // Setup dark mode toggle
