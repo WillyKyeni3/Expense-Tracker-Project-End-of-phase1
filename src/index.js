@@ -15,41 +15,24 @@ let allExpenses = [];
 document.addEventListener('DOMContentLoaded', () => {
   loadExpenses();
   setupEventListeners();
-
-  // Attach event delegation ONCE
-  expenseList.addEventListener('click', (e) => {
-    const expenseItem = e.target.closest('.expense-item');
-    if (!expenseItem) return;
-
-    const expenseId = expenseItem.dataset.id;
-
-    if (e.target.closest('.edit-btn')) {
-      makeEditable(expenseItem, expenseId);
-    }
-    if (e.target.closest('.delete-btn')) {
-      if (confirm('Delete this expense?')) {
-        deleteExpense(expenseId, expenseItem);
-      }
-    }
-  });
 });
 
-// fetch expenses from localStorage
+// Fetch all expenses from JSON Server
 function loadExpenses() {
-    fetch('http://localhost:3000/expenses')
+  fetch('http://localhost:3000/expenses')
     .then(response => response.json())
     .then(expenses => {
-        allExpenses = expenses;
-        renderExpenses(allExpenses);
-        renderChart(allExpenses);
+      allExpenses = expenses;
+      renderExpenses(allExpenses);
+      renderChart(allExpenses);
     })
     .catch(error => {
-        console.error('Error loading expenses:', error);
-        expenseList.innerHTML = '<p>Error loading expenses. Please try again later.</p>';
+      console.error('Error loading expenses:', error);
+      expenseList.innerHTML = '<li>Error loading expenses</li>';
     });
 }
 
-// render expenses in the list
+// Render expense list
 function renderExpenses(expenses) {
   expenseList.innerHTML = '';
   
@@ -61,7 +44,7 @@ function renderExpenses(expenses) {
   expenses.forEach(expense => {
     const li = document.createElement('li');
     li.className = 'expense-item';
-    li.dataset.id = expense.id; // Ensure data-id is set
+    li.dataset.id = expense.id;
     
     // Color code categories
     const categoryColors = {
@@ -84,57 +67,29 @@ function renderExpenses(expenses) {
         <button class="delete-btn" title="Delete"><i class='bx bx-trash'></i></button>
       </div>
     `;
-
+    
     expenseList.appendChild(li);
   });
-
-  // setupDynamicEventListeners();
 }
 
-// setupDynamicEventListeners
-// function setupDynamicEventListeners() {
-//   // Remove any previous listeners to avoid duplicates
-//   expenseList.replaceWith(expenseList.cloneNode(true));
-//   // Re-select expenseList after replacement
-//   const newExpenseList = document.getElementById('expenses');
-//   newExpenseList.addEventListener('click', (e) => {
-//     const expenseItem = e.target.closest('.expense-item');
-//     if (!expenseItem) return;
-
-//     const expenseId = expenseItem.dataset.id; // Use string ID
-
-//     if (e.target.closest('.edit-btn')) {
-//       makeEditable(expenseItem, expenseId);
-//     }
-//     if (e.target.closest('.delete-btn')) {
-//       if (confirm('Delete this expense?')) {
-//         deleteExpense(expenseId, expenseItem);
-//       }
-//     }
-//   });
-// }
-
-// Add new expense POST request
+// Add new expense
 function addExpense(expense) {
-    fetch('http://localhost:3000/expenses', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(expense)
-    })
+  fetch('http://localhost:3000/expenses', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(expense)
+  })
     .then(response => response.json())
     .then(createdExpense => {
-        allExpenses.unshift(createdExpense);
-        renderExpenses(allExpenses);
-        renderChart(allExpenses); 
-        expenseForm.reset();
+      allExpenses.unshift(createdExpense);
+      renderExpenses(allExpenses);
+      renderChart(allExpenses);
+      expenseForm.reset();
     })
     .catch(error => {
-        console.error('Error adding expense:', error);
-        // alert('Failed to add expense. Please try again.');
+      console.error('Error adding expense:', error);
     });
 }
-
-
 
 // Filter expenses
 function filterExpenses() {
@@ -171,19 +126,19 @@ function resetFilters() {
 
 // Chart.js integration
 function renderChart(expenses) {
-    // Aggregate expenses by category
-    const categoryTotals = expenses.reduce((acc, expense) => {
-        acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
-        return acc;
-    }, {});
+  // Aggregate data by category
+  const categoryTotals = expenses.reduce((acc, expense) => {
+    acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
+    return acc;
+  }, {});
 
-    // Destroy existing chart if it exists
-    if (window.expenseChart) {
-        window.expenseChart.destroy();
-    }
+  // Destroy existing chart if it exists
+  if (window.expenseChart) {
+    window.expenseChart.destroy();
+  }
 
-    // Create new chart
-    const ctx = expenseChartCanvas.getContext('2d');
+  // Create new chart
+  const ctx = expenseChartCanvas.getContext('2d');
   window.expenseChart = new Chart(ctx, {
     type: 'pie',
     data: {
@@ -203,120 +158,7 @@ function renderChart(expenses) {
   });
 }
 
-// Dark mode toggle
-function setupDarkMode() {
-  const icon = darkModeToggle.querySelector('i');
-  
-  darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    
-    // Update icon or add visual feedback
-    if (document.body.classList.contains('dark-mode')) {
-      icon.classList.remove('bx-moon');
-      icon.classList.add('bx-sun');
-    } else {
-      icon.classList.remove('bx-sun');
-      icon.classList.add('bx-moon');
-    }
-  });
-}
-
-
-
-// setup event listeners
-function setupEventListeners() {
-    // Handle form submission
-    expenseForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-      const newExpense = {
-      amount: parseFloat(document.getElementById('amount').value),
-      category: document.getElementById('category').value,
-      description: document.getElementById('description').value,
-      date: document.getElementById('date').value
-    };
-    
-    addExpense(newExpense);
-    })
-
-    // Handle category filter change: To be uncommented after fix
-  categoryFilter.addEventListener('change', filterExpenses);
-  startDateFilter.addEventListener('change', filterExpenses);
-  endDateFilter.addEventListener('change', filterExpenses);
-
-    // Handle reset filters button
-    resetFiltersBtn.addEventListener('click', resetFilters);
-
-// Setup dynamic event listeners for edit/delete buttons
-    // Setup event listeners for dynamic elements
-
-
-// Make expense item editable
-function makeEditable(expenseItem, expenseId) {
-  // Get original expense data
-  const originalExpense = allExpenses.find(e => e.id === expenseId);
-  if (!originalExpense) return;
-
-  // Add edit mode class
-  expenseItem.classList.add('edit-mode');
-
-  // Create edit form
-  const form = document.createElement('form');
-  form.className = 'edit-form';
-
-  form.innerHTML = `
-    <input type="number" value="${originalExpense.amount}" required>
-    <select>
-      <option value="Food" ${originalExpense.category === 'Food' ? 'selected' : ''}>Food</option>
-      <option value="Housing" ${originalExpense.category === 'Housing' ? 'selected' : ''}>Housing</option>
-      <option value="Entertainment" ${originalExpense.category === 'Entertainment' ? 'selected' : ''}>Entertainment</option>
-      <option value="Transportation" ${originalExpense.category === 'Transportation' ? 'selected' : ''}>Transportation</option>
-      <option value="Utilities" ${originalExpense.category === 'Utilities' ? 'selected' : ''}>Utilities</option>
-    </select>
-    <input type="text" value="${originalExpense.description}" required>
-    <input type="date" value="${originalExpense.date}">
-    
-    <div class="edit-actions">
-      <button type="submit" class="save-btn"><i class='bx bx-save'></i></button>
-      <button type="button" class="cancel-btn"><i class='bx bx-x'></i></button>
-    </div>
-  `;
-
-  // Replace content with form
-  expenseItem.innerHTML = '';
-  expenseItem.dataset.id = expenseId;
-  expenseItem.appendChild(form);
-
-  // Handle Save
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const inputs = form.querySelectorAll('input');
-    const category = form.querySelector('select').value;
-
-    const updatedExpense = {
-      amount: parseFloat(inputs[0].value),
-      category: category,
-      description: inputs[1].value,
-      date: inputs[2].value
-    };
-
-    saveExpense(expenseId, updatedExpense, expenseItem);
-  });
-
-  // Handle Cancel
-  const cancelBtn = form.querySelector('.cancel-btn');
-  if (cancelBtn) {
-    cancelBtn.addEventListener('click', () => {
-      renderExpenses(allExpenses); // Revert to original view
-    });
-  }
-}
-
-
-
-// Save edited expense
-// Save updated expense  , expenseItem
+// Save updated expense
 function saveExpense(expenseId, updatedData, expenseItem) {
   fetch(`http://localhost:3000/expenses/${expenseId}`, {
     method: 'PATCH',
@@ -334,7 +176,7 @@ function saveExpense(expenseId, updatedData, expenseItem) {
       const index = allExpenses.findIndex(e => e.id === expenseId);
       allExpenses[index] = updatedExpense;
       
-      // Create updated DOM structure
+      // Create updated HTML
       const updatedHTML = `
         <div class="amount">KE $${updatedExpense.amount.toFixed(2)}</div>
         <div class="category-tag">${updatedExpense.category}</div>
@@ -351,7 +193,7 @@ function saveExpense(expenseId, updatedData, expenseItem) {
       expenseItem.innerHTML = updatedHTML;
       expenseItem.dataset.id = updatedExpense.id;
       
-      // Re-attach event listeners (they get removed when innerHTML is used)
+      // Reattach event listeners
       const editBtn = expenseItem.querySelector('.edit-btn');
       const deleteBtn = expenseItem.querySelector('.delete-btn');
       
@@ -367,8 +209,7 @@ function saveExpense(expenseId, updatedData, expenseItem) {
         });
       }
       
-      // Re-render with updated data
-      renderExpenses(allExpenses);
+      // Update chart
       renderChart(allExpenses);
     })
     .catch(error => {
@@ -393,7 +234,9 @@ function deleteExpense(expenseId, expenseItem) {
       allExpenses = allExpenses.filter(e => e.id !== expenseId);
       
       // Remove from DOM
-      expenseItem.remove();
+      if (expenseItem && expenseItem.parentNode) {
+        expenseItem.parentNode.removeChild(expenseItem);
+      }
       
       // Update chart
       renderChart(allExpenses);
@@ -404,8 +247,135 @@ function deleteExpense(expenseId, expenseItem) {
     });
 }
 
-    // Setup dark mode toggle
-    setupDarkMode();
-    // Setup dynamic event listeners
-    // setupDynamicEventListeners();
+// Make expense item editable
+function makeEditable(expenseItem, expenseId) {
+  const originalExpense = allExpenses.find(e => e.id === expenseId);
+  if (!originalExpense) return;
+  
+  // Add edit mode class
+  expenseItem.classList.add('edit-mode');
+  
+  // Create edit form
+  const form = document.createElement('form');
+  form.className = 'edit-form';
+  
+  form.innerHTML = `
+    <input type="number" value="${originalExpense.amount}" required>
+    <select>
+      <option value="Food" ${originalExpense.category === 'Food' ? 'selected' : ''}>Food</option>
+      <option value="Housing" ${originalExpense.category === 'Housing' ? 'selected' : ''}>Housing</option>
+      <option value="Entertainment" ${originalExpense.category === 'Entertainment' ? 'selected' : ''}>Entertainment</option>
+      <option value="Transportation" ${originalExpense.category === 'Transportation' ? 'selected' : ''}>Transportation</option>
+      <option value="Utilities" ${originalExpense.category === 'Utilities' ? 'selected' : ''}>Utilities</option>
+    </select>
+    <input type="text" value="${originalExpense.description}" required>
+    <input type="date" value="${originalExpense.date}">
+    
+    <div class="edit-actions">
+      <button type="submit" class="save-btn"><i class='bx bx-save'></i></button>
+      <button type="button" class="cancel-btn"><i class='bx bx-x'></i></button>
+    </div>
+  `;
+  
+  // Replace content with form
+  expenseItem.innerHTML = '';
+  expenseItem.dataset.id = expenseId;
+  expenseItem.appendChild(form);
+  
+  // Handle Save
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const inputs = form.querySelectorAll('input');
+    const category = form.querySelector('select').value;
+    
+    const updatedExpense = {
+      amount: parseFloat(inputs[0].value),
+      category: category,
+      description: inputs[1].value,
+      date: inputs[2].value
+    };
+    
+    saveExpense(expenseId, updatedExpense, expenseItem);
+  });
+  
+  // Handle Cancel
+  const cancelBtn = form.querySelector('.cancel-btn');
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', () => {
+      renderExpenses(allExpenses);
+    });
+  }
 }
+
+// Dark mode toggle
+function setupDarkMode() {
+  const icon = darkModeToggle.querySelector('i');
+  
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    
+    // Update icon
+    if (document.body.classList.contains('dark-mode')) {
+      icon.classList.remove('bx-moon');
+      icon.classList.add('bx-sun');
+    } else {
+      icon.classList.remove('bx-sun');
+      icon.classList.add('bx-moon');
+    }
+  });
+}
+
+// Setup all event listeners
+function setupEventListeners() {
+  // Form submission
+  expenseForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const newExpense = {
+      amount: parseFloat(document.getElementById('amount').value),
+      category: document.getElementById('category').value,
+      description: document.getElementById('description').value,
+      date: document.getElementById('date').value
+    };
+    
+    addExpense(newExpense);
+  });
+
+  // Filter events
+  categoryFilter.addEventListener('change', filterExpenses);
+  startDateFilter.addEventListener('change', filterExpenses);
+  endDateFilter.addEventListener('change', filterExpenses);
+
+  // Reset button
+  resetFiltersBtn.addEventListener('click', resetFilters);
+
+  // Dark mode
+  setupDarkMode();
+}
+
+// Setup event listeners for dynamic elements
+function setupDynamicEventListeners() {
+  // Delegated event listener for edit/delete
+  expenseList.addEventListener('click', (e) => {
+    const expenseItem = e.target.closest('.expense-item');
+    if (!expenseItem) return;
+
+    const expenseId = parseInt(expenseItem.dataset.id);
+    
+    // Handle Edit Button
+    if (e.target.closest('.edit-btn')) {
+      makeEditable(expenseItem, expenseId);
+    }
+    
+    // Handle Delete Button
+    if (e.target.closest('.delete-btn')) {
+      if (confirm('Delete this expense?')) {
+        deleteExpense(expenseId, expenseItem);
+      }
+    }
+  });
+}
+
+// Call dynamic event listeners
+setupDynamicEventListeners();
