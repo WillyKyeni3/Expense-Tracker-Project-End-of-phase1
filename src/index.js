@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fetch all expenses from JSON Server
 function loadExpenses() {
-  fetch('http://localhost:3000/expenses')
+  fetch('https://expanse-tracker-json-server.onrender.com/expenses')
     .then(response => response.json())
     .then(expenses => {
       allExpenses = expenses;
@@ -74,7 +74,7 @@ function renderExpenses(expenses) {
 
 // Add new expense
 function addExpense(expense) {
-  fetch('http://localhost:3000/expenses', {
+  fetch('https://expanse-tracker-json-server.onrender.com/expenses', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(expense)
@@ -160,7 +160,7 @@ function renderChart(expenses) {
 
 // Save updated expense
 function saveExpense(expenseId, updatedData, expenseItem) {
-  fetch(`http://localhost:3000/expenses/${expenseId}`, {
+  fetch(`https://expanse-tracker-json-server.onrender.com/expenses/${expenseId}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updatedData)
@@ -192,7 +192,7 @@ function saveExpense(expenseId, updatedData, expenseItem) {
 
 // Delete expense
 function deleteExpense(expenseId, expenseItem) {
-  fetch(`http://localhost:3000/expenses/${expenseId}`, {
+  fetch(`https://expanse-tracker-json-server.onrender.com/expenses/${expenseId}`, {
     method: 'DELETE'
   })
     .then(response => {
