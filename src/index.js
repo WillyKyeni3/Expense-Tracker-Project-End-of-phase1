@@ -58,7 +58,7 @@ function renderExpenses(expenses) {
     li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
 
     li.innerHTML = `
-      <div class="amount">KE $${expense.amount.toFixed(2)}</div>
+      <div class="amount">KE ${expense.amount.toFixed(2)}</div>
       <div class="category-tag">${expense.category}</div>
       <div class="description">${expense.description}</div>
       <div class="date">${new Date(expense.date).toLocaleDateString()}</div>
@@ -178,7 +178,7 @@ function saveExpense(expenseId, updatedData, expenseItem) {
       
       // Create updated HTML
       const updatedHTML = `
-        <div class="amount">KE $${updatedExpense.amount.toFixed(2)}</div>
+        <div class="amount">KE ${updatedExpense.amount.toFixed(2)}</div>
         <div class="category-tag">${updatedExpense.category}</div>
         <div class="description">${updatedExpense.description}</div>
         <div class="date">${new Date(updatedExpense.date).toLocaleDateString()}</div>
