@@ -1,49 +1,28 @@
 {
   "expenses": [
     {
-      "id": "1",
-      "amount": 25.5,
-      "category": "Food",
-      "description": "Groceries",
-      "date": "2025-10-01"
-    },
-    {
-      "id": "2",
-      "amount": 150,
-      "category": "Housing",
-      "description": "Rent",
-      "date": "2025-10-01"
-    },
-    {
-      "id": "3",
+      "id": 1,
       "amount": 12.99,
       "category": "Entertainment",
       "description": "Movie Night",
       "date": "2025-10-02"
     },
     {
-      "id": "4",
+      "id": 2,
       "amount": 45.75,
       "category": "Transportation",
       "description": "Gas",
       "date": "2025-10-03"
     },
     {
-      "id": "5",
-      "amount": 80,
-      "category": "Utilities",
-      "description": "Electricity Bill",
-      "date": "2025-10-04"
-    },
-    {
-      "id": "d524",
+      "id": 3,
       "amount": 300,
       "category": "Food",
       "description": "Chicken",
       "date": "2025-06-25"
     },
     {
-      "id": "b5da",
+      "id": 4,
       "amount": 8000,
       "category": "Housing",
       "description": "Rent",
