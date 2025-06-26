@@ -19,7 +19,7 @@
 /* Global Styles */
 :root {
   --bg-color: #e0f7f1;
-  --text-color: #333;
+  --text-color: #000000;
   --accent-color: #4caf50;
   --card-bg: #fff;
   --border-radius: 8px;
@@ -68,8 +68,8 @@ body.dark-mode .app-header h1 {
 }
 
 .bx {
-    font-size: 1.5rem;
-    color: rgb(126, 126, 126);
+    font-size: 1.0rem;
+    color: rgb(83, 82, 83);
 }
 .bx:hover {
     color: #dddddd;
@@ -193,9 +193,8 @@ form button:hover{
 }
 .filters button,
 #reset-filters:hover {
-  background: #b2e0d4 ; /* Darker green on hover */
-   /* Match border color on hover */
-}
+  background: #b2e0d4 ; /*Darker green on hover*/
+} 
 
 /* Expense List */
 #expense-list {
@@ -217,16 +216,6 @@ form button:hover{
   padding: 0;
 }
 
-/* .expense-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem;
-  margin-bottom: 0.5rem;
-  background: #e0f7fa;
-  border-left: 5px solid var(--accent-color);
-  border-radius: var(--border-radius);
-} */
 
 .expense-item .amount {
   font-weight: bold;
@@ -273,15 +262,15 @@ canvas {
   gap: 0.5rem;
 }
 
-.edit-btn,
+ .edit-btn,
 .delete-btn {
-  background: #b2e0d4; /* Lighter green background */
+  background: none; /* Lighter green background */
   border: none;
-  font-size: 1.2rem;
-  color: #5f6368;
+  font-size: 0.5rem;
+  color: #ffffff;
   cursor: pointer;
   transition: color 0.3s ease;
-}
+} 
 
 .edit-btn:hover,
 .delete-btn:hover {
@@ -326,3 +315,8 @@ canvas {
 }
 
 /*responsive*/
+@media (max-width: 768px) {
+  .app-main {
+    flex-direction: column;
+  }
+}
