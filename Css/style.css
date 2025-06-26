@@ -206,16 +206,21 @@ canvas {
   height: auto;
 }
 
-/* Expense Actions */
-.expense-actions {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+/* Expense Item Layout */
+.expense-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto; /* Last column for actions */
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.actions {
   display: flex;
   gap: 0.5rem;
 }
 
-.expense-actions button {
+.edit-btn,
+.delete-btn {
   background: none;
   border: none;
   font-size: 1.2rem;
@@ -224,7 +229,8 @@ canvas {
   transition: color 0.3s ease;
 }
 
-.expense-actions button:hover {
+.edit-btn:hover,
+.delete-btn:hover {
   color: #d32f2f;
 }
 
