@@ -1,28 +1,28 @@
 {
   "expenses": [
     {
-      "id": 1,
-      "amount": 12.99,
+      "id": "1",
+      "amount": 700.99,
       "category": "Entertainment",
       "description": "Movie Night",
       "date": "2025-10-02"
     },
     {
-      "id": 2,
-      "amount": 45.75,
+      "id": "2",
+      "amount": 450.75,
       "category": "Transportation",
       "description": "Gas",
       "date": "2025-10-03"
     },
     {
-      "id": 3,
+      "id": "3",
       "amount": 300,
       "category": "Food",
       "description": "Chicken",
       "date": "2025-06-25"
     },
     {
-      "id": 4,
+      "id": "4",
       "amount": 8000,
       "category": "Housing",
       "description": "Rent",
