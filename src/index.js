@@ -52,10 +52,9 @@ function renderExpenses(expenses) {
             Utilities: '#e8f5e9'
         };
 
-        li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
+        li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5'; 
 
         li.innerHTML = `
-            
             <div class="amount">KE ${expense.amount.toFixed(2)}</div>
             <div class="category-tag">${expense.category}</div>
             <div class="description">${expense.description}</div>
@@ -197,6 +196,42 @@ function setupEventListeners() {
 
     // Handle reset filters button
     resetFiltersBtn.addEventListener('click', resetFilters);
+
+// Setup dynamic event listeners for edit/delete buttons
+    // Setup event listeners for dynamic elements
+function setupDynamicEventListeners() {
+  // Delegated event listener for edit/delete
+  expenseList.addEventListener('click', (e) => {
+    // Find closest <li> element
+    const expenseItem = e.target.closest('.expense-item');
+    if (!expenseItem) return;
+
+    // Get expense ID from DOM
+    const expenseId = parseInt(expenseItem.dataset.id);
+    
+    // Handle Edit Button
+    if (e.target.closest('.edit-btn')) {
+      makeEditable(expenseItem, expenseId);
+    }
+    
+    // Handle Delete Button
+    if (e.target.closest('.delete-btn')) {
+      if (confirm('Delete this expense?')) {
+        deleteExpense(expenseId, expenseItem);
+      }
+    }
+  });
+}
+
+// Make expense item editable
+function makeEditable(expenseItem, expenseId) {
+  // Get original expense data
+  const originalExpense = allExpenses.find(e => e.id === expenseId);
+  if (!originalExpense) return;
+  
+  // Add edit mode class
+  expenseItem.classList.add('edit-mode');
+  
 
     // Setup dark mode toggle
     setupDarkMode();
