@@ -36,7 +36,7 @@ function loadExpenses() {
 function renderExpenses(expenses) {
     expenseList.innerHTML = '';
     if (expenses.length === 0) {
-        expenseList.innerHTML = '<p>No expenses found.</p>';
+        expenseList.innerHTML = '<li>No expenses found.</li>';
         return;
     }
     expenses.forEach(expense => {
@@ -55,6 +55,10 @@ function renderExpenses(expenses) {
         li.style.backgroundColor = categoryColors[expense.category] || '#f5f5f5';
 
         li.innerHTML = `
+            <div class="expense-actions">
+              <button class="edit-btn" title="Edit"><i class='bx bx-edit'></i></button>
+              <button class="delete-btn" title="Delete"><i class='bx bx-trash'></i></button>
+            </div>
             <div class="amount">KE ${expense.amount.toFixed(2)}</div>
             <div class="category-tag">${expense.category}</div>
             <div class="description">${expense.description}</div>
