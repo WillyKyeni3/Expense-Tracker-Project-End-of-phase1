@@ -18,7 +18,7 @@
 
 /* Global Styles */
 :root {
-  --bg-color: #f9f9f9;
+  --bg-color: #e0f7f1;
   --text-color: #333;
   --accent-color: #4caf50;
   --card-bg: #fff;
@@ -46,12 +46,17 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--accent-color);
-  color: white;
+  background: transparent;
+  color: #004d00;/* Dark green background */
 }
 
 .app-header h1 {
   margin: 0;
+}
+
+body.dark-mode .app-header h1 {
+  font-size: 1.8rem;
+  color: white; /* Dark green color */
 }
 
 /* moon icon */
@@ -64,10 +69,10 @@ body {
 
 .bx {
     font-size: 1.5rem;
-    color: rgb(241, 241, 241);
+    color: rgb(126, 126, 126);
 }
 .bx:hover {
-    color: #a8a8a8;
+    color: #dddddd;
 }
 
 /* Add sun/moon icons */
@@ -105,7 +110,7 @@ body.dark-mode .bx-moon {
 
 /* Form & Filters */
 .filters {
-  background: var(--card-bg);
+  background: #66b3a1;
   padding: 1rem;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -119,7 +124,7 @@ body.dark-mode .bx-moon {
 
 .filters select,
 .filters input[type="date"] {
-  width: 100%;
+  width: 95%;
   padding: 0.5rem;
   margin-top: 0.25rem;
   border: 1px solid #ccc;
@@ -137,17 +142,25 @@ body.dark-mode .bx-moon {
 }
 form,
 .filters {
-  background: var(--card-bg);
+  background: #66b3a1;
   padding: 1rem;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-bottom: 2rem;
+  border: 1px solid #66b3a1;
+}
+
+form h2, 
+.filters h3 {
+  margin-top: 0;
+  color: #004d00; /* Dark green color for headings */
 }
 
 form label,
 .filters label {
   display: block;
   margin: 0.5rem 0;
+  
 }
 
 form input,
@@ -155,7 +168,7 @@ form select,
 form textarea,
 .filters input,
 .filters select {
-  width: 100%;
+  width: 95%;
   padding: 0.5rem;
   margin-top: 0.25rem;
   border: 1px solid #ccc;
@@ -167,19 +180,36 @@ form button,
 #reset-filters {
   margin-top: 1rem;
   padding: 0.75rem;
-  background: var(--accent-color);
+  background:  #007a33;
   color: white;
-  border: none;
+  border: 1px solid #66b3a1;
   border-radius: var(--border-radius);
   cursor: pointer;
 }
 
+/* Form button hover effect */
+form button:hover{
+  background: #b2e0d4 ;
+}
+.filters button,
+#reset-filters:hover {
+  background: #b2e0d4 ; /* Darker green on hover */
+   /* Match border color on hover */
+}
+
 /* Expense List */
 #expense-list {
-  background: var(--card-bg);
+  background: #b2e0d4; /* Lighter green background */
   padding: 1rem;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #66b3a1;
+}
+
+#expense-list h2,
+#chart-container h2 {
+  margin-top: 0;
+  color: #004d00; /* Dark green color for headings */
 }
 
 #expenses {
@@ -212,11 +242,12 @@ form button,
 
 /* Chart */
 #chart-container {
-  background: var(--card-bg);
+  background: #b2e0d4; /* Lighter green background */
   padding: 1rem;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-top: 2rem;
+  border: 1px solid #66b3a1;
 }
 
 canvas {
@@ -230,6 +261,8 @@ canvas {
   grid-template-columns: 1fr 1fr 1fr 1fr auto; /* Last column for actions */
   gap: 0.5rem;
   align-items: center;
+  border-left: 5px solid var(--accent-color);
+  border-radius: var(--border-radius);
 }
 
 .actions {
@@ -239,7 +272,7 @@ canvas {
 
 .edit-btn,
 .delete-btn {
-  background: none;
+  background: #b2e0d4; /* Lighter green background */
   border: none;
   font-size: 1.2rem;
   color: #5f6368;
